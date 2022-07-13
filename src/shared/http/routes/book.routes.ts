@@ -18,5 +18,10 @@ bookRoutes.post('/create',celebrate({
 
 bookRoutes.get('/',bookCreateController.index)
 
+bookRoutes.get('/:sbn',celebrate({
+  [Segments.PARAMS]:{sbn:Joi.number().required(),
+  }
+}),bookCreateController.getBook)
+
 export {bookRoutes}
 
