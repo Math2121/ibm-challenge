@@ -6,7 +6,7 @@ import { CreateBookService } from "./CreateBookService";
 let createBookService: CreateBookService;
 let bookRepositoryInMemory: BooksRepositoryInMemory;
 
-describe("Create Car", () => {
+describe("Create a Book", () => {
   beforeEach(() => {
     bookRepositoryInMemory = new BooksRepositoryInMemory();
     createBookService = new CreateBookService(bookRepositoryInMemory);
