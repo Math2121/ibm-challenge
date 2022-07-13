@@ -1,15 +1,17 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
 
-@Entity('books')
+@Entity("books")
 class Book{
 
   @PrimaryColumn('int')
   SBN:number
 
   @Column()
-  name:string
+  nome:string
+
   @Column()
-  description:string
+  descricao:string
+
   @Column()
   autor:string
 

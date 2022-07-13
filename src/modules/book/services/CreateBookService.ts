@@ -1,5 +1,6 @@
-import { getRepository, Repository } from "typeorm";
-import { Book } from "../typeorm/entities/Book";
+import AppError from "@shared/errors/AppError";
+import { getCustomRepository} from "typeorm";
+import { BooksRepository } from "../typeorm/repositories/BooksRepository";
 
 interface IRequest{
   SBN:number;
@@ -9,11 +10,14 @@ interface IRequest{
   estoque:number;
 }
 class CreateBookService{
-  private repository: Repository<Book>;
-  constructor() {
-    this.repository = getRepository(Book);
-  }
+ 
   public async execute({name,autor,SBN,descricao,estoque}: IRequest){
-const bookExists = await this.repository.
+const bookRepository = getCustomRepository(BooksRepository)
+
+const bookExist =  await bookRepository.findSBN(SBN)
+console.log(bookExist)
+
   }
 }
+
+export {CreateBookService}
