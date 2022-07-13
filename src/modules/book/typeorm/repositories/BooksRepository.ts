@@ -40,7 +40,7 @@ export class BooksRepository implements IBookRepository{
     }
 
     async list(): Promise<IPaginate> {
-      const books = await this.repository.createQueryBuilder('books').paginate() as IPaginate;
+      const books = await this.repository.createQueryBuilder('books').select(['books.nome']).paginate() as IPaginate;
       return books
 
     }
