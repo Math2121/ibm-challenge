@@ -5,6 +5,7 @@ import {celebrate,Joi,Segments} from 'celebrate'
 
 const bookRoutes = Router();
 const bookCreateController = new BookController();
+
 bookRoutes.post('/create',celebrate({
   [Segments.BODY]:{
     SBN:Joi.number().required(),
@@ -14,6 +15,8 @@ bookRoutes.post('/create',celebrate({
     estoque: Joi.number().required().precision(1),
   }
 }),bookCreateController.store)
+
+bookRoutes.get('/',bookCreateController.index)
 
 export {bookRoutes}
 

@@ -1,8 +1,8 @@
 import AppError from "@shared/errors/AppError";
 import { getCustomRepository} from "typeorm";
-import { BooksRepository } from "../typeorm/repositories/BooksRepository";
+import { BooksRepository } from "../../typeorm/repositories/BooksRepository";
 import { inject, injectable } from "tsyringe";
-import { IBookRepository } from "../repositories/IBookRepository";
+import { IBookRepository } from "../../repositories/IBookRepository";
 interface IRequest{
   SBN:number;
   nome:string;

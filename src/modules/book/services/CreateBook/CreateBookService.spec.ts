@@ -1,5 +1,5 @@
 import AppError from "@shared/errors/AppError";
-import { BooksRepositoryInMemory } from "../repositories/in-memory/BookRepositoryInMemory";
+import { BooksRepositoryInMemory } from "../../repositories/in-memory/BookRepositoryInMemory";
 
 import { CreateBookService } from "./CreateBookService";
 
