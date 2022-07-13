@@ -1,22 +1,33 @@
 import AppError from "@shared/errors/AppError";
 import { getCustomRepository} from "typeorm";
 import { BooksRepository } from "../typeorm/repositories/BooksRepository";
-
+import { inject, injectable } from "tsyringe";
+import { IBookRepository } from "../repositories/IBookRepository";
 interface IRequest{
   SBN:number;
-  name:string;
+  nome:string;
   autor:string;
   descricao:string;
   estoque:number;
 }
+@injectable()
 class CreateBookService{
- 
-  public async execute({name,autor,SBN,descricao,estoque}: IRequest){
-const bookRepository = getCustomRepository(BooksRepository)
+  constructor(
+    @inject("BookRepository")
+     private bookRepository: IBookRepository
+   ) {}
 
-const bookExist =  await bookRepository.findSBN(SBN)
-console.log(bookExist)
+  public async execute({nome,autor,SBN,descricao,estoque}: IRequest){
 
+    const bookExist =  await this.bookRepository.findSBN(SBN)
+    
+      if(bookExist){
+        throw new AppError('This book already exists')
+      }
+
+    const book = await this.bookRepository.create({nome,autor,SBN,descricao,estoque})
+
+    return book
   }
 }
 

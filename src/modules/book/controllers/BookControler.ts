@@ -1,16 +1,19 @@
 import { Request, Response } from "express"
+import {container} from 'tsyringe'
 import { CreateBookService } from "../services/CreateBookService"
 
 export default class BookController{
 public async store(request: Request,response: Response){
-   const {name,autor,SBN,descricao,estoque} = request.body
-   const bookService = new CreateBookService()
+   const {nome,autor,SBN,descricao,estoque} = request.body
 
-  const book = await bookService.execute({
-    name,autor,SBN,descricao,estoque
+   const createBokService = container.resolve(CreateBookService);
+
+  const book = await createBokService.execute({
+    nome,autor,SBN,descricao,estoque
    })
  
-console.log(book)
-  return response.status(204).json();
+  return response.status(201).json({
+    'book':book
+  });
 }
 }
