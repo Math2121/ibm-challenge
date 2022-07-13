@@ -11,9 +11,16 @@ interface IPaginate{
   data:Book[];
 
 }
+interface IUpdateData{
+  nome?:string;
+  autor?:string;
+  descricao?:string;
+  estoque?:number;
+}
 interface IBookRepository{
   create(data:ICreateBookDTO):Promise<Book>
   findSBN(sbn:number):Promise<Book>
   list():Promise<IPaginate>
+  update(sbn:number, data:IUpdateData):Promise<void>
 }
 export {IBookRepository}

@@ -23,5 +23,14 @@ bookRoutes.get('/:sbn',celebrate({
   }
 }),bookCreateController.getBook)
 
+bookRoutes.put('/:sbn',celebrate({
+  [Segments.BODY]:{
+    nome:Joi.string(),
+    descricao:Joi.string(),
+    autor:Joi.string(),
+    estoque: Joi.number().precision(1),
+  },
+  [Segments.PARAMS]:{sbn:Joi.number().required()}
+}),bookCreateController.update)
 export {bookRoutes}
 

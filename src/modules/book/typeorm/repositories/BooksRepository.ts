@@ -1,6 +1,14 @@
 import { IBookRepository } from "@modules/book/repositories/IBookRepository";
 import {  getRepository, Repository } from "typeorm";
 import { Book } from "../entities/Book";
+interface IUpdateData{
+  nome?:string;
+  autor?:string;
+  descricao?:string;
+  estoque?:number;
+  updated_at:Date
+}
+
 interface IData{
   SBN:number;
   nome:string;
@@ -24,6 +32,7 @@ export class BooksRepository implements IBookRepository{
   constructor() {
     this.repository = getRepository(Book);
   }
+ 
 
      async findSBN(sbn:number):Promise<Book>{
       const book:any = await this.repository.findOne({where:{SBN:sbn}})
@@ -44,4 +53,33 @@ export class BooksRepository implements IBookRepository{
       return books
 
     }
+    async update(sbn:number, data: Book): Promise<void> {
+ 
+      const updateData:IUpdateData = {
+        nome: data.nome,
+        autor: data.autor,
+        descricao: data.descricao,
+        estoque:data.estoque,
+        updated_at: new Date(),
+      };
+
+      if (typeof updateData.nome === 'undefined') {
+        delete updateData.nome;
+      }
+      if (typeof updateData.autor === 'undefined') {
+        delete updateData.autor;
+      }
+      if (typeof updateData.descricao === 'undefined') {
+        delete updateData.descricao;
+      }
+
+      if (typeof updateData.estoque === 'undefined') {
+        delete updateData.estoque;
+      }
+
+    
+    await this.repository.update(sbn,updateData);
+    }
+
+    
 }

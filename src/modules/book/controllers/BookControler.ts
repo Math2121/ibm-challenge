@@ -3,6 +3,7 @@ import {container} from 'tsyringe'
 import { CreateBookService } from "../services/CreateBook/CreateBookService"
 import { GetBookByIdService } from "../services/GetBookById/GetBookService";
 import { ListBookService } from "../services/ListBooks/ListBookService";
+import { UpdateBookService } from "../services/UpdateBook/UpdateBookService";
 
 export default class BookController{
 public async store(request: Request,response: Response){
@@ -39,5 +40,17 @@ public async getBook(request: Request,response: Response){
    return response.status(200).json({
      'book':book
    });
+}
+
+public async update(request: Request,response: Response){
+  const {sbn} = request.params
+  const {nome,autor,descricao,estoque} = request.body
+  const bookUpdate = container.resolve(UpdateBookService);
+
+ await bookUpdate.execute({
+    nome,autor,sbn:parseInt(sbn),descricao,estoque
+   })
+ 
+  return response.status(204).json();
 }
 }
