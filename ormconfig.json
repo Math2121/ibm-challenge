@@ -5,6 +5,7 @@
   "username":"postgres",
   "password": "password",
   "database": "ibm-books",
+  "entities": ["./src/modules/**/typeorm/entities/*.ts"],
   "migrations":[
     "./src/shared/typeorm/migrations/*.ts"
   ],
