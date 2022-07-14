@@ -21,7 +21,7 @@ class UpdateBookService{
     if(!book){
       throw new AppError('This book not exists')
     }
-    const result=  await this.bookRepository.update(sbn,{nome,autor,descricao,estoque})
+    const result =  await this.bookRepository.update(sbn,{nome,autor,descricao,estoque})
     
     return result
   }

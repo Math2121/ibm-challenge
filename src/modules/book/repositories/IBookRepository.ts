@@ -22,5 +22,6 @@ interface IBookRepository{
   findSBN(sbn:number):Promise<Book>
   list():Promise<IPaginate>
   update(sbn:number, data:IUpdateData):Promise<Book>
+  delete(sbn:number):Promise<void>
 }
 export {IBookRepository}

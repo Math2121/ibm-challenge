@@ -23,6 +23,11 @@ bookRoutes.get('/:sbn',celebrate({
   }
 }),bookCreateController.getBook)
 
+bookRoutes.delete('/:sbn',celebrate({
+  [Segments.PARAMS]:{sbn:Joi.number().required(),
+  }
+}),bookCreateController.delete)
+
 bookRoutes.put('/:sbn',celebrate({
   [Segments.BODY]:{
     nome:Joi.string(),

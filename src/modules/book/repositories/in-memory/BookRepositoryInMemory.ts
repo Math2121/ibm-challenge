@@ -28,6 +28,9 @@ interface IUpdateData{
 }
 
 export class BooksRepositoryInMemory implements IBookRepository{
+  delete(sbn: number): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 
 
   book: Book[] = [];

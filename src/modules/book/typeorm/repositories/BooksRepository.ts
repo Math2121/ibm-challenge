@@ -28,11 +28,11 @@ interface IPaginate{
 
 }
 export class BooksRepository implements IBookRepository{
-  private repository: Repository<Book>;
-  constructor() {
-    this.repository = getRepository(Book);
-  }
- 
+    private repository: Repository<Book>;
+    constructor() {
+      this.repository = getRepository(Book);
+    }
+
 
      async findSBN(sbn:number):Promise<Book>{
       const book:any = await this.repository.findOne({where:{SBN:sbn}})
@@ -84,5 +84,9 @@ export class BooksRepository implements IBookRepository{
     return result
     }
 
+   async delete(sbn: number): Promise<void> {
+     await this.repository.delete(sbn)
+    }
+   
     
 }

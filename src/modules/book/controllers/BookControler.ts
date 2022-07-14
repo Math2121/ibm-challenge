@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import {container} from 'tsyringe'
 import { CreateBookService } from "../services/CreateBook/CreateBookService"
+import { DeleteBookService } from "../services/DeleteBook/DeleteBookService";
 import { GetBookByIdService } from "../services/GetBookById/GetBookService";
 import { ListBookService } from "../services/ListBooks/ListBookService";
 import { UpdateBookService } from "../services/UpdateBook/UpdateBookService";
@@ -52,5 +53,14 @@ public async update(request: Request,response: Response){
   })
  
   return response.status(200).json(result);
+}
+
+public async delete(request: Request,response: Response){
+  const {sbn} = request.params
+  const deleteBookService = container.resolve(DeleteBookService);
+
+  await deleteBookService.execute(sbn)
+
+  return response.status(204).json()
 }
 }
