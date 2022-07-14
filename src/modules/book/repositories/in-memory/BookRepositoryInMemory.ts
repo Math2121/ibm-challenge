@@ -28,9 +28,6 @@ interface IUpdateData{
 }
 
 export class BooksRepositoryInMemory implements IBookRepository{
-  delete(sbn: number): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
 
 
   book: Book[] = [];
@@ -67,23 +64,29 @@ export class BooksRepositoryInMemory implements IBookRepository{
       const book = this.book.filter(book => book.SBN === sbn);
 
       const newBook = book.map((item:Book) => {
-if(data.autor !== undefined){
-  item.autor = data.autor;
-}
-if(data.nome !== undefined){
-  item.nome = data.nome;
-}
-if(data.descricao !== undefined){
-  item.descricao = data.descricao;
-}
-if(data.estoque !== undefined){
-  item.estoque = data.estoque;
-}
+          if(data.autor !== undefined){
+            item.autor = data.autor;
+          }
+          if(data.nome !== undefined){
+            item.nome = data.nome;
+          }
+          if(data.descricao !== undefined){
+            item.descricao = data.descricao;
+          }
+          if(data.estoque !== undefined){
+            item.estoque = data.estoque;
+          }
 
-return item
+          return item
       })
 
       return newBook[0]
   
     }
+    async delete(sbn: number): Promise<void> {
+     const index = this.book.findIndex(item=>item.SBN === sbn)
+
+     delete this.book[index];
+    }
+  
 }
