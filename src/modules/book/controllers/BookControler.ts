@@ -47,10 +47,10 @@ public async update(request: Request,response: Response){
   const {nome,autor,descricao,estoque} = request.body
   const bookUpdate = container.resolve(UpdateBookService);
 
- await bookUpdate.execute({
+ const result = await bookUpdate.execute({
     nome,autor,sbn:parseInt(sbn),descricao,estoque
-   })
+  })
  
-  return response.status(204).json();
+  return response.status(200).json(result);
 }
 }

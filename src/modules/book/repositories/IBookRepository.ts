@@ -21,6 +21,6 @@ interface IBookRepository{
   create(data:ICreateBookDTO):Promise<Book>
   findSBN(sbn:number):Promise<Book>
   list():Promise<IPaginate>
-  update(sbn:number, data:IUpdateData):Promise<void>
+  update(sbn:number, data:IUpdateData):Promise<Book>
 }
 export {IBookRepository}

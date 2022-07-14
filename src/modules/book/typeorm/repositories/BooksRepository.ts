@@ -1,5 +1,5 @@
 import { IBookRepository } from "@modules/book/repositories/IBookRepository";
-import {  getRepository, Repository } from "typeorm";
+import {  getRepository, Repository, UpdateResult } from "typeorm";
 import { Book } from "../entities/Book";
 interface IUpdateData{
   nome?:string;
@@ -53,7 +53,7 @@ export class BooksRepository implements IBookRepository{
       return books
 
     }
-    async update(sbn:number, data: Book): Promise<void> {
+    async update(sbn:number, data: Book): Promise<Book> {
  
       const updateData:IUpdateData = {
         nome: data.nome,
@@ -78,7 +78,10 @@ export class BooksRepository implements IBookRepository{
       }
 
     
-    await this.repository.update(sbn,updateData);
+     await this.repository.update(sbn,updateData)
+
+    const result = this.findSBN(sbn)
+    return result
     }
 
     
