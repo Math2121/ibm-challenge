@@ -21,9 +21,9 @@ class CreateBookService{
 
     const bookExist =  await this.bookRepository.findSBN(SBN)
     
-      if(bookExist){
+    if(bookExist){
         throw new AppError('This book already exists')
-      }
+    }
 
     const book = await this.bookRepository.create({nome,autor,SBN,descricao,estoque})
 

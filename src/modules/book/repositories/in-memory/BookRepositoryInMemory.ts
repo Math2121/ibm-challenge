@@ -28,10 +28,9 @@ interface IUpdateData{
 }
 
 export class BooksRepositoryInMemory implements IBookRepository{
+    book: Book[] = [];
 
-
-  book: Book[] = [];
-     async findSBN(sbn:number):Promise<Book>{
+    async findSBN(sbn:number):Promise<Book>{
      return this.book.find(book => book.SBN === sbn) as Book;
    
     }

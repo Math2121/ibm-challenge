@@ -35,8 +35,8 @@ export class BooksRepository implements IBookRepository{
 
 
      async findSBN(sbn:number):Promise<Book>{
-      const book:any = await this.repository.findOne({where:{SBN:sbn}})
-      return book;
+      const book = await this.repository.findOne({where:{SBN:sbn}})
+      return book as Book;
     }
 
      async create({SBN,nome,autor,descricao,estoque}:IData){
